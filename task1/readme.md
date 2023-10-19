@@ -48,3 +48,7 @@ always_ff @(posedge clk, posedge rst) // CHALLENGE asynchronous reset
     else count <= count + {{WIDTH-1{1'b0}}, en}; // could be rewrittn with a mux? also why the brackets around the first arg
 ```
 * in order to test this, would have to modify the tb (pls sum1 do dis):
+# todos if time allows:
+* setup a .gitignore 
+* replace doit.sh with make clean
+* properly test async rst
