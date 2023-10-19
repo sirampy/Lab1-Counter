@@ -40,7 +40,7 @@ viewing the output in GTKwiewer should look something like:
             pause = 0;
         }
 ```
-[challenge_waveform](images/challenge1)
+![challenge waveform](images/challenge1)
 * Added clk to podedge to always_ff:
 ```
 always_ff @(posedge clk, posedge rst) // CHALLENGE asynchronous reset
