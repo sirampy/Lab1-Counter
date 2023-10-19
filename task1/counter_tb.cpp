@@ -5,6 +5,7 @@
 int main(int argc, char **argv, char **env){
     int i; 
     int clk;
+    int pause = -1;
 
     Verilated::commandArgs(argc, argv);
     // init verilog instance
@@ -28,10 +29,26 @@ int main(int argc, char **argv, char **env){
             top->eval ();
         }
     
-    // change signals during
-    top->rst = (i<2) | (i == 15);
-    top->en = (i>4);
-    if (Verilated::gotFinish()) exit(0);
+        // change signals during
+        top->rst = (i<2) | (i == 15);
+        top->en = !(i<=4);
+
+        // CHALLENGE: set pause enable for 3 cycles counter reaches 9 (i feel like this is a janky way of doint it)
+        
+        if(pause > 0){
+            top->en = 0;
+            pause -= 1;
+        }else if(pause == 0){
+            pause -= 1;
+        }else if((top->count == 8) & (pause != 0)){ // needs to set pause at 8 as this line if code is before the model is evaluated
+            pause = 3;
+        }
+        if(top->rst == 1){
+            pause = 0;
+        }
+
+        // exit on finish or stop
+        if (Verilated::gotFinish()) exit(0);
     }
 
     tfp -> close();

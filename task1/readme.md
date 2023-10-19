@@ -24,3 +24,20 @@ files produced by verilator, including the makefile to create the executable:
 viewing the output in GTKwiewer should look something like:
 
 ![wavefrom](images/waveform)
+
+#challenge:
+* Added a variable to track how manny cycles to pause for to the test bench:
+```
+  if(pause > 0){
+            top->en = 0;
+            pause -= 1;
+        }else if(pause == 0){
+            pause -= 1;
+        }else if((top->count == 8) & (pause != 0)){ // needs to set pause at 8 as this line if code is before the model is evaluated
+            pause = 3;
+        }
+        if(top->rst == 1){
+            pause = 0;
+        }
+```
+* Added 
