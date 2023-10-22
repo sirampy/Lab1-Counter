@@ -9,6 +9,6 @@ module counter #(
 
 always_ff @(posedge clk, posedge rst) // CHALLENGE asynchronous reset
     if (rst) count <= {WIDTH{1'b0}};
-    else count <= count + {{WIDTH-1{1'b0}}, en}; //could be rewrittn with a mux? also why the brackets around the first arg
+    else count <= count + {{WIDTH-1{1'b0}}, en}; // could be rewrittn with a mux? also why the brackets around the first arg
 
 endmodule
