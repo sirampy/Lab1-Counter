@@ -6,7 +6,7 @@ jus as a note, it says modify counter.sv in the instructions when it perhaps sho
     // change signals during
     shoot = vbdFlag();
     top->ld = shoot;
-    if(shoot){
+    if(shoot){ // this conditional is kinda unnecesary
         top->v = vbdValue();
     }
     top->rst = 0;
@@ -24,6 +24,7 @@ jus as a note, it says modify counter.sv in the instructions when it perhaps sho
     top->ld = 0;
 ```
 # implementing steping only when button is pressed:
+at the top of main loop:
 ```cpp
     step = 0;
     while(step == 0){ // this is cringe - infinite loops W/O timeout are a bad idea - plus there is defo a cleaner way to implement this
