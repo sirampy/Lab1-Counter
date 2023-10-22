@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # setup params
-MODULE_NAME="counter"
+MODULE_NAME="top"
 MODULE_NAME_V="V${MODULE_NAME}"
 TB="${MODULE_NAME}_tb.cpp"
 SV="${MODULE_NAME}.sv"
@@ -19,7 +19,7 @@ verilator -Wall --cc --trace $SV --exe $TB
 make -j -C obj_dir/ -f $MK $MODULE_NAME_V
 
 # run executable to make vcd
-obj_dir/Vcounter
+obj_dir/$MODULE_NAME_V
 
 # open in gtkwave
 # gtkwave $VCD

@@ -1,8 +1,8 @@
-#include "Vcounter.h"
+#include "Vtop.h"
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 #include "vbuddy.cpp"
-const char* PROG_NAME = "Lab1: Counter"; // could put all params in a namespace if i end up with a lot of them
+const char* PROG_NAME = "Lab1: BCD"; // could put all params in a namespace if i end up with a lot of them
 
 int main(int argc, char **argv, char **env){
     int i; 
@@ -12,7 +12,7 @@ int main(int argc, char **argv, char **env){
 
     Verilated::commandArgs(argc, argv);
     // init verilog instance
-    Vcounter* top = new Vcounter();
+    Vtop* top = new Vtop();
     //init trace dump
     Verilated::traceEverOn(true);
     VerilatedVcdC* tfp = new VerilatedVcdC;
@@ -27,13 +27,13 @@ int main(int argc, char **argv, char **env){
     // init simulation inputs
     top->clk = 1;
     top->rst = 0;
-    top->ld = 1;
+    top->en = 1;
     top->v = vbdValue();
 
     // run simulation 
-    for (i = 0; i < 500; i++){
+    for (i = 0; i < 50; i++){
 
-        step = 0;
+        step = 0; // can be used to enable / dissable steppyness
         while(step == 0){ // this is cringe - infinite loops W/O timeout are a bad idea - plus there is defo a cleaner way to implement this
             step = vbdFlag();
         }
@@ -56,7 +56,6 @@ int main(int argc, char **argv, char **env){
         vbdCycle(i+1);
 
         // change signals during
-        top->ld = 0;
 
         // exit on finish or stop
         if (Verilated::gotFinish()) exit(0);
