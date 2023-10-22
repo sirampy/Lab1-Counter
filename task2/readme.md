@@ -1,20 +1,20 @@
-# what i did:
+# what I did:
 - setup vbuddy.cfg
 - setup initialised and ended the serial communication
-```
+``` cpp
     // init vbuddy
 
     if (vbdOpen()!=1) return (-1);
     vbdHeader(PROG_NAME);
 ```
-```
+``` cpp
     vbdClose();
     tfp -> close();
     exit(0);
 ```
 getting this to work appears to be slightly tempramental. I needed to flick a few switches on the vbuddy to get it to ack() properly.
 - plotted the output of the counter to a 7seg display simulated on the vbuddy's screen
-```
+``` cpp
     // send count to vbuddy 
     
     vbdHex(4, (int(top->count) >> 16) & 0xF);
@@ -26,18 +26,18 @@ getting this to work appears to be slightly tempramental. I needed to flick a fe
     vbdCycle(i+1);
 ```
 - ploted the output of the counter with the vbdPlot function
-```
+``` cpp
     // output to vbuddy
     vbdPlot(int(top->count), 0, 255);
     vbdCycle(i+1);
-```
+``` 
 - made en read from the vbdFlag
-```
+``` cpp
     top->en = vbdFlag(); // set allow enable to be set by button
 ```
 # CHALLENGE:
 I changed the function of en to set the direction of counting
-```
+``` sv
 module counter #(
     parameter WIDTH = 8
 )(
